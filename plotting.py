@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 import os
 import glob
 from pathlib import Path
-from matplotlib.patches import Circle
+from matplotlib.patches import Circle, Rectangle
 from matplotlib.animation import FuncAnimation
 import numpy as np
 from guidance_control import ssa_array
@@ -128,7 +128,7 @@ def generate_env_plots(env, case_dir, gif_id):
     
     generate_obs_tcpa_dcpa_plot(env, case_dir)
     
-    # generate_trajectory_anim(env, case_dir, gif_id)
+    generate_trajectory_anim(env, case_dir, gif_id)
 
 def generate_agent_plots(agent, case_dir):
     
@@ -383,17 +383,25 @@ def generate_path_plot(env, case_dir):
             # ax.plot(agent.curr_ss[3] * agent.length / agent0.length, agent.curr_ss[4] * agent.length / agent0.length, 
             #     '*k', markersize=12, label=f'Agent {agent.id} - Obstacle')
             
-            circle = Circle((agent.curr_ss[3] * agent.length / agent0.length, agent.curr_ss[4] * agent.length / agent0.length), 
-                env.safe_radius, 
-                facecolor='none', edgecolor='k', linestyle='dotted', linewidth=1.5)
+            # circle = Circle((agent.curr_ss[3] * agent.length / agent0.length, agent.curr_ss[4] * agent.length / agent0.length), 
+            #     env.safe_radius, 
+            #     facecolor='none', edgecolor='k', linestyle='dotted', linewidth=1.5)
             
-            ax.add_patch(circle)
+            # ax.add_patch(circle)
             
-            circle = Circle((agent.curr_ss[3] * agent.length / agent0.length, agent.curr_ss[4] * agent.length / agent0.length), 
-                agent.length / (2 * agent0.length), 
-                facecolor='k', edgecolor='k', linewidth=1.5)
+            rectangle = Rectangle((agent.curr_ss[3] * agent.length / agent0.length - env.safe_radius/2, agent.curr_ss[4] * agent.length / agent0.length - env.safe_radius/2), 
+                                  5*env.safe_radius, 5*env.safe_radius, facecolor = 'none', edgecolor = 'k', linestyle = 'dotted', linewidth = 1.5)
+            ax.add_patch(rectangle)
             
-            ax.add_patch(circle)
+            # circle = Circle((agent.curr_ss[3] * agent.length / agent0.length, agent.curr_ss[4] * agent.length / agent0.length), 
+            #     agent.length / (2 * agent0.length), 
+            #     facecolor='k', edgecolor='k', linewidth=1.5)
+            
+            # ax.add_patch(circle)
+            
+            rectangle = Rectangle((agent.curr_ss[3] * agent.length / agent0.length - env.safe_radius/2, agent.curr_ss[4] * agent.length / agent0.length- env.safe_radius/2), 
+                                  5*env.safe_radius, 5*env.safe_radius, facecolor = 'k', edgecolor = 'k', linestyle = 'dotted', linewidth = 1.5)
+            ax.add_patch(rectangle)
             
             circle = Circle((agent.curr_ss[3] * agent.length / agent0.length, agent.curr_ss[4] * agent.length / agent0.length), 
                 agent0.guidance_dict['collision_tolerance'], 
@@ -616,11 +624,15 @@ def plot_path(agent, case_dir):
     plt.savefig(f'{case_dir}/{case_dir[-8:]}_{agent.id:02d}_path.svg', format='svg', bbox_inches='tight')
     plt.close()
 
-def plot_cross_track_error(agent, case_dir):
-    
+def plot_cross_track_error(agent, case_dir):    
     t = agent.t
     ype = agent.ype
     
+    # Ensure both arrays have the same length
+    min_length = min(len(t), len(ype))
+    t = t[:min_length]
+    ype = ype[:min_length]
+
     fig, ax = plt.subplots()
     ax.plot(t, ype, 'k', linewidth=1.5, label=f'Agent {agent.id}' )
     ax.set_xlim([t[0], t[-1]])
@@ -641,6 +653,12 @@ def plot_heading(agent, case_dir):
     psi = ssa_array(agent.ss[:, 5]) * 180 / np.pi
     psi_des = ssa_array(agent.psi_des) * 180 / np.pi
     
+    # Ensure both arrays have the same length
+    min_length = min(len(t), len(psi_des))
+    t = t[:min_length]
+    psi_des = psi_des[:min_length]
+    psi = psi[:min_length]
+
     fig, ax = plt.subplots()
     ax.plot(t, psi_des, '--r', linewidth=1.5, label=f'Agent {agent.id} - Desired' )
     ax.plot(t, psi, 'k', linewidth=1.5, label=f'Agent {agent.id} - Actual' )
@@ -662,6 +680,12 @@ def plot_delta(agent, case_dir):
     delta = ssa_array(agent.ss[:, 6]) * 180 / np.pi
     delta_c = ssa_array(agent.delta_c) * 180 / np.pi
     
+    # Ensure both arrays have the same length
+    min_length = min(len(t), len(delta_c))
+    t = t[:min_length]
+    delta_c = delta_c[:min_length]
+    delta = delta[:min_length]
+    
     fig, ax = plt.subplots()
     ax.plot(t, delta_c, '--r', linewidth=1.5, label=f'Agent {agent.id} - Commanded' )
     ax.plot(t, delta, 'k', linewidth=1.5, label=f'Agent {agent.id} - Actual' )
@@ -680,6 +704,11 @@ def plot_delta(agent, case_dir):
     t = agent.t
     n_prop = agent.ss[:, 7] * 60
     n_c = agent.n_c * 60
+    
+    min_length1 = min(len(t), len(n_c))
+    t = t[:min_length1]
+    n_c = n_c[:min_length1]
+    n_prop = n_prop[:min_length1]
     
     fig, ax = plt.subplots()
     ax.plot(t, n_c, '--r', linewidth=1.5, label=f'Agent {agent.id} - Commanded' )
@@ -706,9 +735,22 @@ def plot_state_space(agent, case_dir):
     y = agent.ss[:, 4]
     
     fig, ax = plt.subplots()
+    
+    min_length1 = min(len(t), len(u))
+    t = t[:min_length1]
+    u = u[:min_length1]   
     ax.plot(t, u, linewidth=1.5, label=f'Agent {agent.id} - u\'' )
+    
+    min_length2 = min(len(t), len(v))   
+    t = t[:min_length2]
+    v = v[:min_length2]    
     ax.plot(t, v, linewidth=1.5, label=f'Agent {agent.id} - v\'' )
+    
+    min_length3 = min(len(t), len(r))
+    t = t[:min_length3]
+    r = r[:min_length3]    
     ax.plot(t, r, linewidth=1.5, label=f'Agent {agent.id} - r\'' )
+    
     ax.set_xlim([t[0], t[-1]])
     ax.grid(linewidth = 0.5, color='gray',linestyle='dotted')        
     plt.xlabel('$t\'$',fontsize=15)
@@ -722,7 +764,13 @@ def plot_state_space(agent, case_dir):
     plt.close()
     
     fig, ax = plt.subplots()
+    min_length3 = min(len(t), len(x))
+    t = t[:min_length1]
+    x = x[:min_length1]  
     ax.plot(t, x, linewidth=1.5, label=f'Agent {agent.id} - x\'' )
+    min_length3 = min(len(t), len(y))
+    t = t[:min_length2]
+    y = y[:min_length2]  
     ax.plot(t, y, linewidth=1.5, label=f'Agent {agent.id} - y\'' )
     ax.set_xlim([t[0], t[-1]])
     ax.grid(linewidth = 0.5, color='gray',linestyle='dotted')        

@@ -24,10 +24,16 @@ kcs_pid = {
 
 kcs_guidance = {
     'waypoints': None, 
-    'dLA' : 2,
+    'dLA' : 4,
     'ki' : 0.025,
-    'kappa' : 0.05,
+    'kappa' : 0.5,
     'tracking_tolerance' : 3,
     'collision_tolerance' : 2,
-    'reactive_guidance' : 'vo'   
+    'reactive_guidance' : 'vo',
+    'katt' : 50,
+    'krep' : 200000,
+    'vortex_strength' : 10,
+    'source_strength' : 100,
+    'sink_strength' : -100,
+    'doublet_strength' : 100
 }

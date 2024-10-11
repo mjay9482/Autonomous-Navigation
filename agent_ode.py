@@ -31,7 +31,7 @@ def kcs_ode(t, v, delta_c=0, n_c=115.5/60, Fn=0.26, ypd_int=0,
     s_err = v[9]
     
 
-    #n_prop = 115.5/60 # change this later (to account for speed control)
+   # n_prop = 115.5/60 # change this later (to account for speed control)
 
     # Derived kinematic variables
     b = np.arctan2(-vp, up)     # Drift angle

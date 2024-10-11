@@ -9,7 +9,7 @@ case_dir = 'case00vo'
 np.random.seed()
 np.random.seed()
 
-time_step = 0.25
+time_step = 3
 Tmax = 100
 
 safe_radius = 15

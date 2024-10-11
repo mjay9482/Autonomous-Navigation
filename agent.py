@@ -250,8 +250,7 @@ class Agent():
                         self.state = 1
                         self.collision_state = 1
                     
-        else:
-            
+        else:            
             # Keep tracking the current heading
             
             log.debug(f'Guidance type not set for Agent {self.id}. Guidance will follow current heading!')
@@ -267,7 +266,7 @@ class Agent():
         
         if self.control_dict is not None:
         
-            delta_c, n_c = guidance_control.control(psid, ss, control_dict=self.control_dict)
+            delta_c, n_c = guidance_control.control(psid, ss, control_dict = self.control_dict)
                 
         else:
             

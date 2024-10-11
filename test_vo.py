@@ -14,7 +14,7 @@ from sim_params import sim_params
 params = sim_params(seed=0, case_dir=f'stat01', method='vo', environment=1)
 params.initialize()
 
-case_list = np.arange(5) + 1 
+case_list = np.arange(18) + 1 
 case_list = case_list.tolist()
 
 # case_list = [10, 11, 12, 13, 36, 37, 38, 39]
@@ -26,6 +26,5 @@ case_list = case_list.tolist()
 case_list = [5]
 
 for i in case_list:
-    #exec(f'import cases_input.stat{i:02d} as params')
     exec(f'import cases_input.case{i:02d}vo as params')
     _ = run.execute(params, gif_id=None, plot_flag=True, mat_flag=True, mat_save_flag=True)

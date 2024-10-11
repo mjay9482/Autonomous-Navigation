@@ -12,7 +12,7 @@ from common_params import kcs_params, kcs_guidance, kcs_pid
 case_dir = 'case01rvo'
 
 time_step = 0.25
-Tmax = 280
+Tmax = 200
 
 safe_radius = 15
 
@@ -58,11 +58,11 @@ agent_controller = [
 
 # Guidance Parameters
 kcs1_guidance = kcs_guidance.copy()
-kcs1_guidance['waypoints'] = [[0, 0], [75, 0]]
+kcs1_guidance['waypoints'] = [[0, 0], [100, 0]]
 kcs1_guidance['reactive_guidance'] = 'rvo'
 
 kcs2_guidance = kcs_guidance.copy()
-kcs2_guidance['waypoints'] = [[15, 0], [100, 0]]
+kcs2_guidance['waypoints'] = [[15, 0], [75, 0]]
 kcs2_guidance['reactive_guidance'] = 'rvo'
 
 agent_guidance = [

@@ -14,7 +14,7 @@ np.random.seed()
 np.random.seed()
 
 time_step = 0.25
-Tmax = 100
+Tmax = 120
 
 safe_radius = 15
 
@@ -48,10 +48,10 @@ agent_froude = [
 
 # Initial Conditions (Expressed in non-dimensional format with respect to each agent)
 agent_init_state = [
-    [1, 0., 0., 10., 0., 0., 0., 115.5/60, 0., 0.],
+    [1, 0., 0., 0., 0., 0., 0., 115.5/60, 0., 0.],
     [1., 0., 0., 60., 0., np.pi, 0., 115.5/60, 0., 0.],
-    [1., 0., 0., 40., -30., np.pi/2, 0., 115.5/60, 0., 0.],
-    [1., 0., 0., 40., 30., -np.pi/2, 0., 115.5/60, 0., 0.]
+    [1., 0., 0., 30., -30., np.pi/2, 0., 115.5/60, 0., 0.],
+    [1., 0., 0., 30., 30., -np.pi/2, 0., 115.5/60, 0., 0.]
     ]
 
 # Agent plant parameters
@@ -72,7 +72,7 @@ agent_controller = [
 
 # Guidance Parameters
 kcs1_guidance = kcs_guidance.copy()
-kcs1_guidance['waypoints'] = [[10, 0], [70, 0]]
+kcs1_guidance['waypoints'] = [[0, 0], [60, 0]]
 kcs1_guidance['reactive_guidance'] = 'vo'
 
 kcs2_guidance = kcs_guidance.copy()
@@ -80,11 +80,11 @@ kcs2_guidance['waypoints'] = [[60, 0], [0, 0]]
 kcs2_guidance['reactive_guidance'] = 'vo'
 
 kcs3_guidance = kcs_guidance.copy()
-kcs3_guidance['waypoints'] = [[40, -30], [40, 30]]
+kcs3_guidance['waypoints'] = [[30, -30], [30, 30]]
 kcs3_guidance['reactive_guidance'] = 'vo'
 
 kcs4_guidance = kcs_guidance.copy()
-kcs4_guidance['waypoints'] = [[40, 30], [40, -30]]
+kcs4_guidance['waypoints'] = [[30, 30], [30, -30]]
 kcs4_guidance['reactive_guidance'] = 'vo'
 
 agent_guidance = [

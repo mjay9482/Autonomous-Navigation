@@ -19,7 +19,7 @@ class sim_params():
         nstatic = 0, 
         ndynamic = 0,
         seed = 0,
-        method = 'rvo',
+        method = 'vo',
         environment = None,
         safe_radius = 15
         ):
@@ -50,6 +50,9 @@ class sim_params():
             elif self.environment == 5:
                 self.nstatic = 4
                 self.ndynamic = 9
+            elif self.environment == 6:
+                self.static = 1
+                self.dynamic = 2
             else:
                 pass
         
@@ -179,4 +182,4 @@ class sim_params():
             else:
                 self.agent_controller.append(None)
         
-        
+
