@@ -14,7 +14,7 @@ case_dir = 'case14vo'
 time_step = 0.25
 Tmax = 250
 
-safe_radius = 10
+safe_radius = 15
 
 # Agent type (kcs or kinematic) 
 # kcs will always be a dynamic agent (moving in a straight line or proactive in collision avoidance)

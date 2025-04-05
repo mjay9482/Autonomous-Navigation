@@ -11,8 +11,8 @@ from common_params import kcs_params, kcs_guidance, kcs_pid
 
 case_dir = 'case01vo'
 
-time_step = 1
-Tmax = 380
+time_step = 0.25
+Tmax = 150
 
 safe_radius = 15
 

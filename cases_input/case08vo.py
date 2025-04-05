@@ -18,9 +18,9 @@ np.random.seed()
 np.random.seed()
 
 time_step = 0.25
-Tmax = 290
+Tmax = 200
 
-safe_radius = 15
+safe_radius = 20
 
 # Agent type (kcs or kinematic) 
 # kcs will always be a dynamic agent (moving in a straight line or proactive in collision avoidance)
@@ -55,7 +55,7 @@ agent_init_state = [
     [1, 0., 0., -30., 0, 0, 0., 115.5/60, 0., 0.],
     [1., 0., 0., -30., 20., -np.pi/4, 0., 115.5/60, 0., 0.],
     [1., 0., 0., -30., -20, np.pi/4, 0., 115.5/60, 0., 0.],
-    [1., 0., 0., 40., 20, -3*np.pi/4, 0., 115.5/60, 0., 0.]
+    [1., 0., 0., 40., 20., -3*np.pi/4, 0., 115.5/60, 0., 0.]
     ]
 
 # Agent plant parameters

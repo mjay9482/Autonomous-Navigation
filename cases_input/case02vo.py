@@ -40,8 +40,8 @@ agent_froude = [
 
 # Initial Conditions (Expressed in non-dimensional format with respect to each agent)
 agent_init_state = [
-    [1, 0., 0., 0., 0., 0., 0., 115.5/60, 0., 0.],
-    [1., 0., 0., 25., 25., -np.pi/2, 0., 58./60, 0., 0.]
+    [1, 0., 0., -40., 0., 0., 0., 115.5/60, 0., 0.],
+    [1., 0., 0., 0., 40., -np.pi/2, 0., 115.5/60, 0., 0.]
     ]
 
 # Agent plant parameters
@@ -58,11 +58,11 @@ agent_controller = [
 
 # Guidance Parameters
 kcs1_guidance = kcs_guidance.copy()
-kcs1_guidance['waypoints'] = [[0, 0], [50, 0]]
+kcs1_guidance['waypoints'] = [[-40, 0], [40, 0]]
 kcs1_guidance['reactive_guidance'] = 'vo'
 
 kcs2_guidance = kcs_guidance.copy()
-kcs2_guidance['waypoints'] = [[25, 25], [25, -25]]
+kcs2_guidance['waypoints'] = [[0, 40], [0, -40]]
 kcs2_guidance['reactive_guidance'] = 'vo'
 
 agent_guidance = [

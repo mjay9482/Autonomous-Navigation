@@ -1,0 +1,6 @@
+# Byte-compiled / cache
+*.py[cod]
+*.so
+__pycache__/
+media/
+

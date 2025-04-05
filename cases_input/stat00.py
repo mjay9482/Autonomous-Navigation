@@ -17,7 +17,7 @@ np.random.seed()
 time_step = 0.25
 Tmax = 300
 
-safe_radius = 15
+safe_radius = 20
 
 nstatic = 1
 ndynamic = 2

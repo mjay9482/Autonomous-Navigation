@@ -11,10 +11,10 @@ from common_params import kcs_params, kcs_guidance, kcs_pid
 
 case_dir = 'case17vo'
 
-time_step = 0.25
+time_step = 1
 Tmax = 350
 
-safe_radius = 15
+safe_radius = 20
 
 # Agent type (kcs or kinematic) 
 # kcs will always be a dynamic agent (moving in a straight line or proactive in collision avoidance)

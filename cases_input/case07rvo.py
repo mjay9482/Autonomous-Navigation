@@ -50,8 +50,8 @@ agent_froude = [
 # Initial Conditions (Expressed in non-dimensional format with respect to each agent)
 agent_init_state = [
     [1, 0., 0., -30., 0, 0, 0., 115.5/60, 0., 0.],
-    [1., 0., 0., -20., 0, 0., 0., 57.5/60, 0., 0.],
-    [1., 0., 0., 20., -20, 3*np.pi/4, 0., 115.5/60, 0., 0.]
+    [1, 0., 0., -20., 0, 0., 0., 57.5/60, 0., 0.],
+    [1, 0., 0., 20., -20, 3*np.pi/4, 0., 115.5/60, 0., 0.]
     ]
 
 # Agent plant parameters

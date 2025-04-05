@@ -14,6 +14,7 @@ case_dir = 'case02rvo'
 time_step = 0.25
 Tmax = 150
 
+
 safe_radius = 15
 
 # Agent type (kcs or kinematic) 
@@ -41,7 +42,7 @@ agent_froude = [
 # Initial Conditions (Expressed in non-dimensional format with respect to each agent)
 agent_init_state = [
     [1, 0., 0., 0., 0., 0., 0., 115.5/60, 0., 0.],
-    [1., 0., 0., 25., 25., -np.pi/2, 0., 58./60, 0., 0.]
+    [1., 0., 0., 25., 25., -np.pi/2, 0., 115.5/60, 0., 0.]
     ]
 
 # Agent plant parameters

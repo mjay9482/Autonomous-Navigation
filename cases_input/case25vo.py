@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Wed Jul 24 14:50:49 2024
+Created on Tue Apr 23 14:32:59 2024
 
 @author: mrityunjay
 """
@@ -12,7 +12,7 @@ from common_params import kcs_params, kcs_guidance, kcs_pid
 case_dir = 'case25vo'
 
 time_step = 0.25
-Tmax = 200
+Tmax = 150
 
 safe_radius = 15
 
@@ -35,13 +35,13 @@ agent_size = [
 # For kinematic vessels make sure the initial conditions are set correctly to maintain this speed
 agent_froude = [
     0.26,
-    0.26
+    0.13
     ]
 
 # Initial Conditions (Expressed in non-dimensional format with respect to each agent)
 agent_init_state = [
     [1, 0., 0., 0., 0., 0., 0., 115.5/60, 0., 0.],
-    [1., 0., 0., 100., 0., np.pi , 0., 115.5/60, 0., 0.]
+    [1., 0., 0., 15., 0., 0, 0., 57.5/60, 0., 0.]
     ]
 
 # Agent plant parameters
@@ -59,13 +59,20 @@ agent_controller = [
 # Guidance Parameters
 kcs1_guidance = kcs_guidance.copy()
 kcs1_guidance['waypoints'] = [[0, 0], [100, 0]]
-kcs1_guidance['reactive_guidance'] = 'vortex'
+kcs1_guidance['reactive_guidance'] = 'vo'
 
 kcs2_guidance = kcs_guidance.copy()
-kcs2_guidance['waypoints'] = [[100, 0], [0, 0]]
+kcs2_guidance['waypoints'] = [[15, 0], [75, 0]]
 kcs2_guidance['reactive_guidance'] = 'vo'
 
 agent_guidance = [
     kcs1_guidance,
     kcs2_guidance
     ]
+
+boundary_list = [
+    [27600, -2760, 27600, 2760, 10, 0.005],
+    [27600, 2760, -2760, 2760, 10, 0.005],
+    [-2760, 2760, -2760, -2760, 10, 0.005],
+    [-2760, -2760, 27600, -2760, 10, 0.005]
+]
